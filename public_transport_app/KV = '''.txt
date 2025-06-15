@@ -1,0 +1,114 @@
+KV = '''
+<TransportUI>:
+    canvas.before:
+        Color:
+            rgba: 0.737, 0.255, 0.169, 1   # Persian red background
+        Rectangle:
+            pos: self.pos
+            size: self.size
+
+    orientation: 'vertical'
+    padding: '10dp'
+    spacing: '10dp'
+
+    # 1. GPS status and coordinates
+    BoxLayout:
+        size_hint_y: None
+        height: '40dp'
+        spacing: '10dp'
+        Label:
+            id: status_label
+            text: 'GPS: initializing...'
+            font_size: '14sp'
+            color: 0, 0, 0, 1   # black
+        Label:
+            id: lat_label
+            text: 'Lat: --'
+            font_size: '14sp'
+            color: 0, 0, 0, 1
+        Label:
+            id: lon_label
+            text: 'Lon: --'
+            font_size: '14sp'
+            color: 0, 0, 0, 1
+
+
+    ScrollView:
+        size_hint_y: 0.3
+        GridLayout:
+            id: vehicles_list
+            cols: 1
+            size_hint_y: None
+            height: self.minimum_height
+            spacing: '5dp'
+            padding: '5dp'
+
+    # 3. Plan trip manually
+    BoxLayout:
+        orientation: 'horizontal'
+        size_hint_y: None
+        height: '50dp'
+        spacing: '5dp'
+        TextInput:
+            id: dest_input
+            hint_text: 'Destination ID or address'
+            multiline: False
+            foreground_color: 0, 0, 0, 1
+            background_color: 0.880, 0.960, 0.880, 1
+        Button:
+            text: 'Plan Trip'
+            size_hint_x: None
+            width: '100dp'
+            background_color: 0.020, 0.659, 0.667, 1
+            color: 0, 0, 0, 1
+            on_press: root.on_plan()
+
+    Label:
+        id: plan_result
+        text: ''
+        size_hint_y: None
+        height: '30dp'
+        color: 0, 0, 0, 1
+
+    # 3b. Plan Lilydale example
+    Button:
+        text: 'Plan Lilydale Trip'
+        size_hint_y: None
+        height: '50dp'
+        background_color: 0.020, 0.659, 0.667, 1
+        color: 0, 0, 0, 1
+        on_press: root.on_plan_lilydale()
+
+    # 4. Make payment
+    BoxLayout:
+        orientation: 'horizontal'
+        size_hint_y: None
+        height: '50dp'
+        spacing: '5dp'
+        TextInput:
+            id: trip_id_input
+            hint_text: 'Trip ID'
+            multiline: False
+            foreground_color: 0, 0, 0, 1
+            background_color: 0.880, 0.960, 0.880, 1
+        TextInput:
+            id: amount_input
+            hint_text: 'Amount'
+            input_filter: 'float'
+            multiline: False
+            foreground_color: 0, 0, 0, 1
+            background_color: 0.880, 0.960, 0.880, 1
+        Button:
+            text: 'Pay'
+            size_hint_x: None
+            width: '80dp'
+            background_color: 0.020, 0.659, 0.667, 1
+            color: 0, 0, 0, 1
+            on_press: root.on_pay()
+
+    Label:
+        id: pay_result
+        text: ''
+        size_hint_y: None
+        height: '30dp'
+        color: 0, 0, 0, 1
